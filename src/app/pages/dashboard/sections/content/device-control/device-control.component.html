@@ -1,0 +1,173 @@
+<div id="card-input" class="p-5">
+    <form>
+        <div class="form-group">
+            <label for="deveui">Device</label>
+            <div class="input-group input-group-lg">
+                <input id="deveui" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Example: 0000000000000000">
+                <div class="input-group-prepend">
+                    <button (click)="btn_search()" id="btn_search" id="btn_search"  type="button" style="min-width: fit-content;" class="btn btn-lg btn-info" ><i class="fas fa-search"></i> Search</button>
+                    <button (click)="btn_select()" id="btn_select" type="button" style="min-width: fit-content;" class="btn btn-lg btn-dark" >SELECT</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+<div id="device_info" class="d-none">
+    
+    <div id="card_statistic" class="card mt-3">
+    
+        <div class="card-header">
+            <h3 class="card-title"><i class="far fa-chart-bar"></i> Graphics Monitoring</h3>
+        
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+    
+        <div class="card-body">
+    
+            <h4>Electrical Params</h4>
+            <div class="row mt-3 mb-5">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-warning p-3">
+                        <h3><span id="active_power">54</span> W</h3>
+                        <p>Active Power</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-danger p-3">
+                        <h3><span id="voltage">120</span> V</h3>
+                        <p>Voltage</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-primary p-3">
+                        <h3><span id="current">0.45</span> mA</h3>
+                        <p>Current</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-success p-3">
+                            <h3><span id="power_factor">90</span> %</h3>
+                            <p>Power Factor</p>
+                    </div>
+                </div>
+            </div>
+        
+            <h4>Status Register</h4>
+            <div class="row mt-3 mb-5">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-success p-3">
+                            <h3><span style="font-size: 0.6em;" id="timestamp">Updated</span></h3>
+                            <p>Timestamp</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-primary p-3">
+                        <h3><span id="working_mode">Auto</span></h3>
+                        <p>Working Mode</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-danger p-3">
+                        <h3><span id="relay_position">Closed / On</span></h3>
+                        <p>Relay Position</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="small-box bg-warning p-3">
+                            <h3><span id="daylight">Day</span></h3>
+                            <p>Daylight</p>
+                    </div>
+                </div>
+            </div>
+        
+            <h4>Sensor Values</h4>
+            <div class="row mt-3 mb-5">
+                <div class="col-12 col-md-6">
+                    <div class="small-box bg-danger p-3">
+                        <h3><span id="illuminance">80</span> Lux</h3>
+                        <p>Illuminance</p>
+                    </div>
+                </div>
+        
+                <div class="col-12 col-md-6">
+                    <div class="small-box bg-primary p-3">
+                        <h3><span id="temperature">43</span> °C</h3>
+                        <p>Temperature</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div id="card_basic_controls" class="card mt-3">
+    
+        <div class="card-header">
+            <h3 class="card-title">Basic Controls</h3>
+        </div>
+    
+        <div class="card-body pt-5 pb-5">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    
+                <div class="col-12 col-md-6 mt-3 mb-3">
+                    <h5>State</h5>
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <button (click)="btn_on()" id="btn_on" type="button" style="min-width: fit-content;" class="btn btn-lg btn-primary">On</button>
+                        <button (click)="btn_off()" id="btn_off" type="button" style="min-width: fit-content;" class="btn btn-lg btn-danger">Off</button>
+                        <button (click)="btn_auto()" id="btn_auto" type="button" style="min-width: fit-content;" class="btn btn-lg btn-success">Auto</button>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-md-6 mt-3 mb-3">
+                    <h5>Dimmer</h5>
+                    <div class="btn-group" role="group" aria-label="Second group">
+                        <button (click)="btn_dim25()" id="btn_dim25" type="button" style="min-width: fit-content; font-size: 1em;" class="btn btn-lg btn-25">25%</button>
+                        <button (click)="btn_dim50()" id="btn_dim50" type="button" style="min-width: fit-content; font-size: 1em;" class="btn btn-lg btn-50">50%</button>
+                        <button (click)="btn_dim75()" id="btn_dim75" type="button" style="min-width: fit-content; font-size: 1em;" class="btn btn-lg btn-75">75%</button>
+                        <button (click)="btn_dim100()" id="btn_dim100" type="button" style="min-width: fit-content; font-size: 1em;" class="btn btn-lg btn-100">100%</button>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-md-6 mt-3 mb-3">
+                    <h5>Other Functions</h5>
+                    <div class="btn-group" role="group" aria-label="Third group">
+                        <button (click)="btn_reset()" id="btn_reset" type="button" style="min-width: fit-content;" class="btn btn-lg btn-danger">Reset</button>
+                        <button (click)="btn_request_status()" id="btn_request_status" type="button" style="min-width: fit-content;" class="btn btn-lg btn-warning">Request Status</button>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-md-6 mt-3 mb-3">
+                    <h5>Custom Downlink</h5>
+                    <div class="input-group input-group-lg">
+                        <input id="custom_payload" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                        <div class="input-group-prepend">
+                          <button (click)="btn_custom_downlink()" id="btn_custom_downlink" type="button" style="min-width: fit-content;" class="btn btn-lg btn-primary" >SEND</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    
+    </div>
+    
+</div>
+
+
+ 
+
+
+

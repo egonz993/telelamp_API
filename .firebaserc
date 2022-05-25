@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "telelamp-dev": {
+      "hosting": {
+        "app": [
+          "telelamp-dev"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "telelamp-dev"
+  }
+}

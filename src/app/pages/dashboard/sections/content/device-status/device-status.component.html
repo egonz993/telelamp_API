@@ -1,0 +1,55 @@
+<div class="col-md-12">
+    <div class="card">
+
+        <div class="card-header">
+            <h3 class="card-title"><b>Photocells Status</b></h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-large btn-outline-success p-2" (click)="reload()">Refresh <span class="d-none d-lg-inline">Data</span></button>
+            </div>
+        </div>
+      
+        <div class="card-body p-1">
+            <table id="devicesTable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover text-center d-none">
+
+                <thead>
+                    <tr>
+                        <th class="d-none d-lg-block">DEVEUI</th>
+                        <th>ID</th>
+                        <th class="d-none d-lg-block">Last Tx</th>
+                        <th>Status</th>
+                        <th>Control</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let device of devices; let i=index">
+                        <td class="d-none d-lg-table-cell">{{device.deveui}}</td>
+                        <td>{{device.comment}}</td>
+                        <td class="d-none d-lg-table-cell">{{formatDate(device.last_reception)}}</td>
+                        
+                        <td class="badge d-table-cell" 
+                                    [ngClass] = "UnixTimestamp(device.last_reception) >= yesterday ? 'bg-success' : ''">
+                            <button class ="btn" style="width: 100%; height: 100%;"
+                                    (click) = "getDeviceInfo(device.deveui)">
+                            <i class="fa fa-wifi"></i>
+                            </button>
+                        </td>
+                        
+                        <td class="badge d-table-cell"
+                                    [ngClass] = "UnixTimestamp(device.last_reception) >= yesterday ? 'bg-warning' : ''">
+                            <a class ="btn" style="width: 100%; height: 100%;" target="_blank"
+                                    routerLink="../devices-control"  [queryParams]="{user: paramsURL['user'], deveui: device.deveui}">
+                            <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div id="loading_div" class="text-center">
+                <img id="loading-image" src="assets/img/giphy-preview.gif" alt="Loading..." style="max-width: 100%;"/>
+            </div> 
+        </div>
+    </div>
+</div>

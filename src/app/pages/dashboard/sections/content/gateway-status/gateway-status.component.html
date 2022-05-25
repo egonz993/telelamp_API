@@ -1,0 +1,18 @@
+<table id="gateways" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover text-center">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let gateway of gateways; let i=index">
+            <td>{{gateway.name}}</td>
+            <td class="badge d-table-cell" 
+            [ngClass] = "{'bg-danger' : gateway.status.includes('ISSUE'), 'bg-warning' : gateway.status.includes('WARNING'), 'bg-success' : gateway.status.includes('OK')}">{{gateway.status}}</td>
+        </tr>
+    </tbody>
+
+</table>
