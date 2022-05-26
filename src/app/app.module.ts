@@ -27,6 +27,7 @@ import { GatewayStatusComponent } from './pages/dashboard/sections/content/gatew
 import { DataTablesModule } from "angular-datatables";
 import { DeviceControlComponent } from './pages/dashboard/sections/content/device-control/device-control.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SerialPortComponent } from './pages/dashboard/sections/content/serial-port/serial-port.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     DeviceStatusComponent,
     GatewayStatusComponent,
-    DeviceControlComponent
+    DeviceControlComponent,
+    SerialPortComponent
   ],
   imports: [
     BrowserModule,
