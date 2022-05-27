@@ -11,13 +11,14 @@ export class LoginComponent implements OnInit {
   
 
   user:string = "";
-  userName:string = "";
-  userPass:string = "";
+  userName:string = "alcaldiamedellin";
+  userPass:string = "alcaldiamedellin";
+  userID:number = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.userSelector()
+    //this.userSelector()
     
   }
 
@@ -48,31 +49,32 @@ export class LoginComponent implements OnInit {
       }
     })
     
+    
+
+  }
+
+
+  gotoDashboard(user:string){
     if(user === 'telemetrik'){
       this.user = "telemetrik"
       this.userName = "alcaldiamedellin"
       this.userPass = "alcaldiamedellin"
-
-      this.router.navigate(['/dashboard'], {queryParams: {user: 0}});
+      this.userID = 0
     }
 
     if(user === 'sabaneta'){
       this.user = "sabaneta"
       this.userName = "hector.hoyos.ceballos"
       this.userPass = "Lgf^Ha2K$Z"
-
-      this.router.navigate(['/dashboard'], {queryParams: {user: 1}});
+      this.userID = 1
     }
+    
+    this.router.navigate(['/dashboard'], {queryParams: {user: this.userID}});
+  }
+
+  gotoWeb(url:string){
 
   }
 
-
-  static getUserName(): string {
-    return "alcaldiamedellin"
-  }
-
-       static getUserPass(): string {
-    return "alcaldiamedellin"
-  }
 
 }
