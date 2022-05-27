@@ -1,8 +1,9 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
+    
     <a href="" class="brand-link">
-        <img src="assets/img/telemetrik_logo.png" alt="Telemetrik" class="brand-text p-2" style="max-width: 100%"><br>
+        <img src="assets/img/telemetrik_logo.png" alt="Telemetrik" class="brand-text p-2" style="max-width: 100%">
     </a>
 
     <!-- Sidebar -->
@@ -23,7 +24,7 @@
 
             <li class="nav-item">
                 <a routerLink="devices-status" [queryParams]="{user: paramsURL['user']}" class="nav-link">
-                <i class="nav-icon far fa-circle text-info"></i>
+                <i class="nav-icon fa fa-microchip text-info" aria-hidden="true"></i>
                 <p>Devices</p>
                 </a>
             </li>
@@ -37,14 +38,14 @@
 
             <li class="nav-item">
                 <a routerLink="gateways-status" [queryParams]="{user: paramsURL['user']}"class="nav-link">
-                <i class="nav-icon far fa-circle text-info"></i>
+                <i class="nav-icon fa fa-wifi text-info"></i>
                 <p>Gateways</p>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a routerLink="serial" [queryParams]="{user: paramsURL['user']}"class="nav-link">
-                <i class="nav-icon far fa-circle text-info"></i>
+                <i class="nav-icon fa fa-desktop text-info"></i>
                 <p>Serial Port</p>
                 </a>
             </li>
