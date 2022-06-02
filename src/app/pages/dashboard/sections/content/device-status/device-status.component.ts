@@ -18,6 +18,9 @@ import { LanguageApp } from './tableLanguage';
 
 export class DeviceStatusComponent implements OnInit {
 
+
+  currentUser:any = "";
+
   username:string = "alcaldiamedellin";
   password:string = "alcaldiamedellin";
 
@@ -49,10 +52,8 @@ export class DeviceStatusComponent implements OnInit {
   
   ngOnInit(): void {
 
-    this.activatedRoute.queryParams
-    .subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       this.paramsURL = params;
-      console.log(typeof this.paramsURL['deveui']);
 
       if(typeof this.paramsURL['user'] !== "undefined"){
         if (this.paramsURL['user'] == 0){
@@ -65,11 +66,9 @@ export class DeviceStatusComponent implements OnInit {
         }
       }
 
-      
+      this.reloadTable()
     });
     
-    this.getDeviceList();
-    //this.interval();
   }
 
   getDeviceList():any{
@@ -238,12 +237,18 @@ export class DeviceStatusComponent implements OnInit {
     return result.toUpperCase();
   }
 
-  reload():any {
+  reloadTable():any {
     // let tabla = $('#devicesTable').DataTable();
     // let tableFilter = tabla.search().valueOf();
     // tabla.search("xx"+tableFilter).draw();
+    
+    $('#devicesTable').addClass('d-none');
+      $('#loading_div').removeClass('d-none');
 
-    window.location.reload()
+      let tabla = $('#devicesTable').DataTable();
+      tabla.destroy();
+      
+      this.getDeviceList();
   }
 
 }
