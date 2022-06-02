@@ -1,18 +1,68 @@
-<table id="gateways" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover text-center">
+<div class="col-md-12">
+    <a target="_blank" href="https://au.saas.orbiwise.com/app/signin"><img src="assets/img/orbiwise_logo.png" style="max-width: 200px; padding: 20px 0 50px 0" alt=""></a>
 
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Status</th>
-        </tr>
-    </thead>
+    <div class="card">
 
-    <tbody>
-        <tr *ngFor="let gateway of gateways; let i=index">
-            <td>{{gateway.name}}</td>
-            <td class="badge d-table-cell" 
-            [ngClass] = "{'bg-danger' : gateway.status.includes('ISSUE'), 'bg-warning' : gateway.status.includes('WARNING'), 'bg-success' : gateway.status.includes('OK')}">{{gateway.status}}</td>
-        </tr>
-    </tbody>
+        <div class="card-header">
+            <h3 class="card-title"><b>Gateways Status</b></h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-large btn-outline-success p-2" (click)="reloadTable()">Refresh <span class="d-none d-lg-inline">Data</span></button>
+            </div>
+        </div>
+      
+        <div class="card-body p-1">
+            <table id="gatewaysTable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover text-center">
 
-</table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    <tr *ngFor="let gateway of gateways; let i=index">
+                        <td>{{gateway.name}}</td>
+                        <td class="badge d-table-cell" 
+                        [ngClass] = "{'bg-danger' : gateway.status.includes('ISSUE'), 'bg-warning' : gateway.status.includes('WARNING'), 'bg-success' : gateway.status.includes('OK')}">{{gateway.status}}</td>
+                    </tr>
+                </tbody>
+            
+            </table>
+
+
+
+            <div id="loading_div" class="text-center">
+                <img id="loading-image" src="assets/img/giphy-preview.gif" alt="Loading..." style="max-width: 100%;"/>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -108,4 +108,25 @@ export class GatewayStatusComponent implements OnInit {
     return date;
   }
 
+
+
+
+  reloadTable():any {
+    // let tabla = $('#devicesTable').DataTable();
+    // let tableFilter = tabla.search().valueOf();
+    // tabla.search("xx"+tableFilter).draw();
+    
+    $('#devicesTable').addClass('d-none');
+      $('#loading_div').removeClass('d-none');
+      
+      this.gateways = [];
+      let tabla = $('#gatewaysTable').DataTable();
+      tabla.destroy();
+      
+      
+      this.getGatewaysList();
+  }
+
+
+
 }
