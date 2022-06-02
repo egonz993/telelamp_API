@@ -8,44 +8,70 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-    <!-- Sidebar user (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-none">
-        <div class="image">
-        <img src="assets/img/user_icon.png" class="img-circle elevation-2" alt="User Image">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-none">
+            <div class="image">
+            <img src="assets/img/user_icon.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+            <a href="#" class="d-block">Eduardo Gonzalez</a>
+            </div>
         </div>
-        <div class="info">
-        <a href="#" class="d-block">Eduardo Gonzalez</a>
-        </div>
-    </div>
 
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-            <li class="nav-item">
-                <a routerLink="devices-status" [queryParams]="{user: paramsURL['user']}" class="nav-link">
-                <i class="nav-icon fa fa-microchip text-info" aria-hidden="true"></i>
-                <p>Devices</p>
-                </a>
-            </li>
+                <li class="nav-header">The People's Network</li>
 
-            <!-- <li class="nav-item">
-                <a routerLink="devices-control" [queryParams]="{user: paramsURL['user']}" class="nav-link">
-                <i class="nav-icon far fa-circle text-info"></i>
-                <p>Control Devices</p>
-                </a>
-            </li> -->
+                <li class="nav-item">
+                    <a routerLink="helium" class="nav-link">
+                    <i class="nav-icon fa fa-globe text-light" aria-hidden="true"></i>
+                    <p>Helium Console</p>
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a routerLink="gateways-status" [queryParams]="{user: paramsURL['user']}"class="nav-link">
-                <i class="nav-icon fa fa-wifi text-info"></i>
-                <p>Gateways</p>
-                </a>
-            </li>
+                <div><hr class="dotted"></div>
+                <li class="nav-header">Orbiwise Telemetrik</li>
 
-        </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
+                <li class="nav-item">
+                    <a routerLink="devices-status" [queryParams]="{user: '0'}" class="nav-link">
+                    <i class="nav-icon fa fa-microchip text-primary" aria-hidden="true"></i>
+                    <p>Devices</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a routerLink="gateways-status" [queryParams]="{user: '0'}"class="nav-link">
+                    <i class="nav-icon fa fa-wifi text-primary"></i>
+                    <p>Gateways</p>
+                    </a>
+                </li>
+
+                <div><hr class="dotted"></div>
+                <li class="nav-header">Orbiwise Sabaneta</li>
+
+                <li class="nav-item">
+                    <a routerLink="devices-status" [queryParams]="{user: '1'}" class="nav-link">
+                        <i class="nav-icon fa fa-microchip text-warning" aria-hidden="true"></i>
+                    <p>Devices</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a routerLink="gateways-status" [queryParams]="{user: '1'}"class="nav-link">
+                    <i class="nav-icon fa fa-wifi text-warning"></i>
+                    <p>Gateways</p>
+                    </a>
+                </li>
+
+                <div><hr class="solid"></div>
+
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
 </aside>

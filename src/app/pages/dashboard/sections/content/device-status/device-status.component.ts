@@ -27,7 +27,6 @@ export class DeviceStatusComponent implements OnInit {
   yesterday:any;
   page:number;
 
-  firstLoad:boolean = true;
 
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: DataTables.Settings = {
@@ -112,7 +111,6 @@ export class DeviceStatusComponent implements OnInit {
       .then(response=>response.json())
       .then(data=>{ 
         console.log("page: "+ (this.page+1) + " of " + pages);
-        this.devices = [];
         for(var i=0; i<data.length; i++){
           this.devices.push(data[i]);
         }
@@ -122,11 +120,7 @@ export class DeviceStatusComponent implements OnInit {
           this.page = 0;
           //console.log(this.initDevices);
           this.devices = this.devices.sort((a:any, b:any) => parseInt(a.comment) - parseInt(b.comment));
-          
-          if(this.firstLoad){
-            this.dtTrigger.next(this.devices);
-            this.firstLoad = false;
-          }
+          this.dtTrigger.next(this.devices);
 
           $('#devicesTable').removeClass('d-none');
           $('#loading_div').addClass('d-none');
@@ -245,16 +239,11 @@ export class DeviceStatusComponent implements OnInit {
   }
 
   reload():any {
-    let tabla = $('#devicesTable').DataTable();
-    let tableFilter = tabla.search().valueOf();
-    tabla.search("xx"+tableFilter).draw();
-  }
+    // let tabla = $('#devicesTable').DataTable();
+    // let tableFilter = tabla.search().valueOf();
+    // tabla.search("xx"+tableFilter).draw();
 
-  interval():any{
-    setInterval(() => {
-      this.devices = []
-      this.getDeviceList();      
-    }, 10*1000);
+    window.location.reload()
   }
 
 }

@@ -1,0 +1,35 @@
+<div class="col-md-12">
+    <div class="card">
+
+        <div class="card-header">
+            <h3 class="card-title"><b>Photocells Status</b></h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-large btn-outline-success p-2" (click)="reload()">Refresh <span class="d-none d-lg-inline">Data</span></button>
+            </div>
+        </div>
+      
+        <div class="card-body p-1">
+            <table id="devicesTable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover text-center d-none">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>DEVEUI</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let device of devices; let i=index">
+                        <td>{{device.id}}</td>
+                        <td>{{device.dev_eui}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div id="loading_div" class="text-center">
+                <img id="loading-image" src="assets/img/giphy-preview.gif" alt="Loading..." style="max-width: 100%;"/>
+            </div> 
+        </div>
+    </div>
+</div>
