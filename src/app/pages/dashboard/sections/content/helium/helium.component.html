@@ -13,14 +13,14 @@
 
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>DEVICE</th>
                         <th>DEVEUI</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr *ngFor="let device of devices; let i=index">
-                        <td>{{device.id}}</td>
+                        <td>{{device.name}}</td>
                         <td>{{device.dev_eui}}</td>
                     </tr>
                 </tbody>
