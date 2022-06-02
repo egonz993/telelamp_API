@@ -15,33 +15,29 @@
 
                 <thead>
                     <tr>
-                        <th class="d-none d-lg-table-cell">DEVEUI</th>
                         <th>ID</th>
+                        <th class="d-none d-lg-table-cell">Deveui</th>
                         <th class="d-none d-lg-table-cell">Last Tx</th>
-                        <th>Status</th>
                         <th>Control</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr *ngFor="let device of devices; let i=index">
-                        <td class="d-none d-lg-table-cell">{{device.deveui}}</td>
-                        <td>{{device.comment}}</td>
-                        <td class="d-none d-lg-table-cell">{{formatDate(device.last_reception)}}</td>
-                        
-                        <td class="badge d-table-cell" 
-                                    [ngClass] = "UnixTimestamp(device.last_reception) >= yesterday ? 'bg-success' : ''">
+                        <td class="badge d-table-cell" [ngClass] = "UnixTimestamp(device.last_reception) >= yesterday ? 'bg-success' : ''">
                             <button class ="btn" style="width: 100%; height: 100%;"
-                                    (click) = "getDeviceInfo(device.deveui)">
-                            <i class="fa fa-wifi"></i>
+                                    (click) = "getDeviceInfo(device.deveui)">{{device.comment}}
                             </button>
                         </td>
+
+                        <td class="d-none d-lg-table-cell">{{device.deveui}}</td>
+
+                        <td class="d-none d-lg-table-cell">{{formatDate(device.last_reception)}}</td>
                         
-                        <td class="badge d-table-cell"
-                                    [ngClass] = "UnixTimestamp(device.last_reception) >= yesterday ? 'bg-warning' : ''">
+                        <td>
                             <a class ="btn" style="width: 100%; height: 100%;" target="_blank"
                                     routerLink="../devices-control"  [queryParams]="{user: paramsURL['user'], deveui: device.deveui}">
-                            <i class="fa fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                             </a>
                         </td>
                     </tr>

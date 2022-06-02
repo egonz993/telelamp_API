@@ -244,7 +244,8 @@ export class DeviceStatusComponent implements OnInit {
     
     $('#devicesTable').addClass('d-none');
       $('#loading_div').removeClass('d-none');
-
+      
+      this.devices = [];
       let tabla = $('#devicesTable').DataTable();
       tabla.destroy();
       
