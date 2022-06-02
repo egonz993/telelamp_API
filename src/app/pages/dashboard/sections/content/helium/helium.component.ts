@@ -24,29 +24,7 @@ export class HeliumComponent implements OnInit {
   constructor() { }
   
   ngOnInit(): void {
-
-    this.getDevicesList();
-
-
-
-    var device_id = "fed877e4-6a9e-4f61-a36e-f4482501c4a5";
-    //@Example GET
-    // this.getDevicesList();//getDevicesList();
-    // this.getDeviceByID("fed877e4-6a9e-4f61-a36e-f4482501c4a5");
-    // this.getDeviceByDeveui("AC1F09FFFE0562FE");
-    // this.getDeviceByAppEui("6081F98A9B2758E6");
-    // this.getDeviceByAppKey("7DBB69A913CFF5E4FA004EFB4AB68613");
-    // this.getDeviceEvents_UL(device_id)
-    // this.getDeviceEvents_UL(device_id, 'base64')
-    // this.getDeviceEvents_UL(device_id, 'ascii')
-    
-    
-    //@Example POST
-    // this.downlinkSchedule(device_id, 'AA==', 'base64')
-    // this.downlinkSchedule(device_id, "11", 'hex')
-    // this.downlinkSchedule(device_id, "EGonzalez", 'ascii')
-
-
+    this.reloadTable();
   }
 
 
@@ -206,8 +184,20 @@ export class HeliumComponent implements OnInit {
 
   
 
-  reload():any {
-    window.location.reload()
-  }
+  reloadTable():any {
+    // let tabla = $('#devicesTable').DataTable();
+    // let tableFilter = tabla.search().valueOf();
+    // tabla.search("xx"+tableFilter).draw();
+    
+    $('#devicesTable').addClass('d-none');
+    $('#loading_div').removeClass('d-none');
+    
+    this.devices = [];
+    let tabla = $('#devicesTable').DataTable();
+    tabla.destroy();
+    
+    
+    this.getDevicesList();
 
+  }
 }
