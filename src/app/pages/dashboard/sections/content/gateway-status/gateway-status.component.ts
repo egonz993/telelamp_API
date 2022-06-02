@@ -50,8 +50,9 @@ export class GatewayStatusComponent implements OnInit {
             this.password = "Lgf^Ha2K$Z";
           }
         }
+
+        this.reloadTable()
       });
-    this.getGatewaysList();
   }
 
   getGatewaysList():any{
@@ -70,6 +71,11 @@ export class GatewayStatusComponent implements OnInit {
         //console.log(data)
         this.gateways = data;
         this.dtTrigger.next(this.gateways);
+
+        
+
+        $('#gatewaysTable').removeClass('d-none');
+        $('#loading_div').addClass('d-none');
       });
   }
 
@@ -116,7 +122,7 @@ export class GatewayStatusComponent implements OnInit {
     // let tableFilter = tabla.search().valueOf();
     // tabla.search("xx"+tableFilter).draw();
     
-    $('#devicesTable').addClass('d-none');
+    $('#gatewaysTable').addClass('d-none');
       $('#loading_div').removeClass('d-none');
       
       this.gateways = [];
