@@ -5,7 +5,6 @@ import { ContentComponent } from './pages/dashboard/sections/content/content.com
 import { DeviceControlComponent } from './pages/dashboard/sections/content/device-control/device-control.component';
 import { DeviceStatusComponent } from './pages/dashboard/sections/content/device-status/device-status.component';
 import { GatewayStatusComponent } from './pages/dashboard/sections/content/gateway-status/gateway-status.component';
-import { SerialPortComponent } from './pages/dashboard/sections/content/serial-port/serial-port.component';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes:Routes = [
@@ -47,10 +46,6 @@ const routes:Routes = [
           {
             path: 'devices-control',
             component: DeviceControlComponent
-          },
-          {
-            path: 'serial',
-            component: SerialPortComponent
           }
         ]
       }
