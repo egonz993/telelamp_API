@@ -164,12 +164,12 @@ export class HeliumControlComponent implements OnInit {
 
       switch(this.raw_events[i].category){
         case 'downlink':
-          event.data = "Payload: " + this.raw_events[i].data.payload;
+          event.data = "Payload (hex): " + this.base64ToHex( this.raw_events[i].data.payload);
           break;
 
           case 'uplink':
             if(event.sub_category == "uplink_unconfirmed" || event.sub_category == "uplink_confirmed"){
-              event.data = "Payload: " + this.raw_events[i].data.payload;
+              event.data = "Payload (hex): " + this.base64ToHex( this.raw_events[i].data.payload);
             }
             
             else if(event.sub_category == "uplink_integration_req"){
@@ -242,6 +242,18 @@ export class HeliumControlComponent implements OnInit {
 
     date = year + "/" + month + "/" + day + " " + hours + ":" + minutes + " " + meridian;
     return date;
+  }
+
+
+  base64ToHex(str:string):any{
+    const raw = atob(str);
+    str = '';
+    for (let j = 0; j < raw.length; j++) {
+      const hex = raw.charCodeAt(j).toString(16);
+      str += (hex.length === 2 ? hex : '0' + hex);
+    }
+
+    return str.toUpperCase()
   }
 
 
