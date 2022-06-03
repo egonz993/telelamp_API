@@ -13,6 +13,8 @@ export class DevicePayloadsComponent implements OnInit {
   password:string = "alcaldiamedellin";
  
   payloads:any = [];
+  payloads_ul:any = [];
+  payloads_dl:any = [];
 
   paramsURL:any = [];
 
@@ -46,11 +48,8 @@ export class DevicePayloadsComponent implements OnInit {
     });
     
   }
- 
 
-
-
-  getPayloads():any{
+  getPayloads_ul():any{
     let url = "https://au.saas.orbiwise.com/rest/nodes/"+this.paramsURL['deveui']+"/payloads/ul?data_format=hex";
     let params = {
       method: 'GET',
@@ -64,14 +63,55 @@ export class DevicePayloadsComponent implements OnInit {
       .then(response=>response.json())
       .then(data=>{ 
         console.log(data)
-        this.payloads = data;
-        this.dtTrigger.next(this.payloads);
-      
-
-        $('#payloadsTable').removeClass('d-none');
-        $('#loading_div').addClass('d-none');
+        this.payloads_ul = data;
+        this.getPayloads_dl();
       });
   }
+ 
+
+  getPayloads_dl():any{
+    let url = "https://au.saas.orbiwise.com/rest/nodes/"+this.paramsURL['deveui']+"/payloads/dl?data_format=hex";
+    let params = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(this.username + ":" + this.password),
+      }
+    }
+
+    fetch(url, params)
+      .then(response=>response.json())
+      .then(data=>{ 
+        console.log(data)
+        this.payloads_dl = data;
+        this.fillTablePayloads();
+      });
+
+  }
+
+  fillTablePayloads():any{
+    for(var i=0; i<this.payloads_ul.length; i++){
+      this.payloads_ul[i]['payload'] = this.payloads_ul[i]['dataFrame'];
+      this.payloads_ul[i]['category'] = 'uplink';
+
+      this.payloads.push(this.payloads_ul[i]);
+
+    }
+
+    for(var i=0; i<this.payloads_dl.length; i++){
+      this.payloads_dl[i]['payload'] = this.payloads_dl[i]['data'];
+      this.payloads_dl[i]['category'] = 'downlink';
+
+      this.payloads.push(this.payloads_dl[i]);
+    }
+
+    this.payloads = this.payloads.sort((a:any, b:any) => parseInt(b.comment) - parseInt(a.comment));
+    this.dtTrigger.next(this.payloads);
+
+    $('#payloadsTable').removeClass('d-none');
+    $('#loading_div').addClass('d-none');
+  }
+
 
 
   UnixTimestamp(date?: any) {
@@ -108,18 +148,17 @@ export class DevicePayloadsComponent implements OnInit {
     return date;
   }
 
-
-
   
   reloadTable():any {
       $('#payloadsTable').addClass('d-none');
       $('#loading_div').removeClass('d-none');
       
-      this.payloads = [];
-      let tabla = $('#payloadsTable').DataTable();
-      tabla.destroy();
 
-      this.getPayloads();
+      this.payloads = [];
+      let table = $('#payloadsTable').DataTable();
+      table.destroy();
+
+      this.getPayloads_ul();
       
   }
 
