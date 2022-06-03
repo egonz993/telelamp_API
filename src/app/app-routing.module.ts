@@ -5,6 +5,7 @@ import { ContentComponent } from './pages/dashboard/sections/content/content.com
 import { DeviceControlComponent } from './pages/dashboard/sections/content/device-control/device-control.component';
 import { DeviceStatusComponent } from './pages/dashboard/sections/content/device-status/device-status.component';
 import { GatewayStatusComponent } from './pages/dashboard/sections/content/gateway-status/gateway-status.component';
+import { HeliumControlComponent } from './pages/dashboard/sections/content/helium-control/helium-control.component';
 import { HeliumComponent } from './pages/dashboard/sections/content/helium/helium.component';
 import { LoginComponent } from './pages/login/login.component';
 
@@ -51,6 +52,10 @@ const routes:Routes = [
           {
             path: 'helium',
             component: HeliumComponent
+          },
+          {
+            path: 'helium-control',
+            component: HeliumControlComponent
           }
         ]
       }

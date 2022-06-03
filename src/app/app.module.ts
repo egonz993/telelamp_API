@@ -28,6 +28,7 @@ import { DataTablesModule } from "angular-datatables";
 import { DeviceControlComponent } from './pages/dashboard/sections/content/device-control/device-control.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeliumComponent } from './pages/dashboard/sections/content/helium/helium.component';
+import { HeliumControlComponent } from './pages/dashboard/sections/content/helium-control/helium-control.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { HeliumComponent } from './pages/dashboard/sections/content/helium/heliu
     DeviceStatusComponent,
     GatewayStatusComponent,
     DeviceControlComponent,
-    HeliumComponent
+    HeliumComponent,
+    HeliumControlComponent
   ],
   imports: [
     BrowserModule,
