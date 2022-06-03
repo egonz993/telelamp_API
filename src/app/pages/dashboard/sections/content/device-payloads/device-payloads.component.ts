@@ -157,7 +157,7 @@ export class DevicePayloadsComponent implements OnInit {
       $('#loading_div').removeClass('d-none');
       
       this.payloads = [];
-      let tabla = $('#payloadsTable').DataTable(this.dtOptions);
+      let tabla = $('#payloadsTable').DataTable();
       tabla.destroy();
 
       this.getPayloads_ul();
