@@ -420,4 +420,11 @@ export class DeviceControlComponent implements OnInit {
     if(status === 27) return 'On';
   }
 
+
+  
+
+  locationBack():any{
+    history.back()
+  }
+
 }

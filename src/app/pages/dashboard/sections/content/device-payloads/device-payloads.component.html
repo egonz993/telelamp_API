@@ -1,0 +1,46 @@
+<div class="col-md-12">
+    <a target="_blank" href="https://au.saas.orbiwise.com/app/signin"><img src="assets/img/orbiwise_logo.png" style="max-width: 200px; padding: 20px 0 50px 0" alt=""></a>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3 class="card-title"><b>Devices Status</b></h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-large btn-outline-success p-2" (click)="reloadTable()">Refresh <span class="d-none d-lg-inline">Data</span></button>
+                <a class ="btn btn-large btn-outline-primary ml-3 p-2"
+                        routerLink="../devices-control"  [queryParams]="{user: paramsURL['user'], deveui: paramsURL['deveui']}">
+                        Controlar
+                </a>
+                <button type="button" class="btn btn-large btn-outline-secondary ml-3 p-2" (click)="locationBack()">Go Back</button>
+            </div>
+        </div>
+      
+        <div class="card-body p-1">
+
+            <table id="payloadsTable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-bordered table-striped table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th class="d-none d-lg-table-cell">Time</th>
+                        <th>Data</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr *ngFor="let payload of payloads; let i=index">
+                        <th>{{i+1}}</th>
+                        <td>Uplink</td>
+                        <td class="d-none d-lg-table-cell">{{formatDate(payload.timestamp)}}</td>
+                        <td>{{payload.dataFrame}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="loading_div" class="text-center">
+                <!-- <img src="assets/img/telemetrik_logo.gif" alt="Telemetrik" class="img-rounded"><br> -->
+                <img id="loading-image" src="assets/img/giphy-preview.gif" alt="Loading..." style="max-width: 100%;"/>
+            </div> 
+        </div>
+    </div>
+</div>

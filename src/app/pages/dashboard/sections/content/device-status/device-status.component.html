@@ -18,7 +18,7 @@
                         <th>ID</th>
                         <th class="d-none d-lg-table-cell">Deveui</th>
                         <th class="d-none d-lg-table-cell">Last Tx</th>
-                        <th>Control</th>
+                        <th>Data</th>
                     </tr>
                 </thead>
 
@@ -35,9 +35,9 @@
                         <td class="d-none d-lg-table-cell">{{formatDate(device.last_reception)}}</td>
                         
                         <td>
-                            <a class ="btn" style="width: 100%; height: 100%;" target="_blank"
-                                    routerLink="../devices-control"  [queryParams]="{user: paramsURL['user'], deveui: device.deveui}">
-                                <i class="fa fa-edit"></i>
+                            <a class ="btn" style="width: 100%; height: 100%;"
+                                    routerLink="../devices-payloads"  [queryParams]="{user: paramsURL['user'], deveui: device.deveui}">
+                                    <i class="fa fa-database"></i>
                             </a>
                         </td>
                     </tr>

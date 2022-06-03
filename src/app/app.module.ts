@@ -29,6 +29,7 @@ import { DeviceControlComponent } from './pages/dashboard/sections/content/devic
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeliumComponent } from './pages/dashboard/sections/content/helium/helium.component';
 import { HeliumControlComponent } from './pages/dashboard/sections/content/helium-control/helium-control.component';
+import { DevicePayloadsComponent } from './pages/dashboard/sections/content/device-payloads/device-payloads.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { HeliumControlComponent } from './pages/dashboard/sections/content/heliu
     GatewayStatusComponent,
     DeviceControlComponent,
     HeliumComponent,
-    HeliumControlComponent
+    HeliumControlComponent,
+    DevicePayloadsComponent
   ],
   imports: [
     BrowserModule,
