@@ -105,8 +105,9 @@ export class DevicePayloadsComponent implements OnInit {
       this.payloads.push(this.payloads_dl[i]);
     }
 
-    this.payloads = this.payloads.sort((a:any, b:any) => parseInt(b.comment) - parseInt(a.comment));
+    this.payloads = this.payloads.sort((a:any, b:any) => parseInt(a.comment) - parseInt(b.comment));
     this.dtTrigger.next(this.payloads);
+
 
     $('#payloadsTable').removeClass('d-none');
     $('#loading_div').addClass('d-none');
@@ -148,15 +149,16 @@ export class DevicePayloadsComponent implements OnInit {
     return date;
   }
 
+
+
   
   reloadTable():any {
       $('#payloadsTable').addClass('d-none');
       $('#loading_div').removeClass('d-none');
       
-
       this.payloads = [];
-      let table = $('#payloadsTable').DataTable();
-      table.destroy();
+      let tabla = $('#payloadsTable').DataTable(this.dtOptions);
+      tabla.destroy();
 
       this.getPayloads_ul();
       
