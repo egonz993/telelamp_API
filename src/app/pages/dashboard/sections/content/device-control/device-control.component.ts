@@ -49,7 +49,7 @@ export class DeviceControlComponent implements OnInit {
 
         //Este debe ir al final, ya que es el que llama a btn_select()
         if(typeof this.paramsURL['deveui'] !== "undefined"){
-          $("#deveui").val(this.paramsURL['deveui']);
+          $("#deveui").text(this.paramsURL['deveui']);
           this.btn_select();
         }
       });
@@ -145,9 +145,7 @@ export class DeviceControlComponent implements OnInit {
 
 
   btn_select():any{
-    //alert("btn_select");
     this.searchDevice();
-    $("#card-input").addClass('d-none');
     $("#device_info").addClass("d-none");
     $("#btn_select").prop( "disabled", true );
     $("#btn_search").prop( "disabled", true );
@@ -155,15 +153,15 @@ export class DeviceControlComponent implements OnInit {
 
   btn_select_checkingDevice():any{
 
-    if($("#deveui").val()?.toString().length === 16){
+    if($("#deveui").text()?.toString().length === 16){
       let result = false;
       for (let i=0; i<this.devices.length; i++){
-        if(this.devices[i].deveui === $("#deveui").val()?.toString().toLocaleLowerCase())
+        if(this.devices[i].deveui === $("#deveui").text()?.toString().toLocaleLowerCase())
           result = true;
       }
 
       if(result){
-        this.deveui = $("#deveui").val()?.toString().toLocaleLowerCase();
+        this.deveui = $("#deveui").text()?.toString().toLocaleLowerCase();
         $("#device_info").removeClass("d-none");
         $("#btn_select").prop( "disabled", true );
         $("#btn_search").prop( "disabled", true );

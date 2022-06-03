@@ -262,4 +262,8 @@ export class HeliumControlComponent implements OnInit {
       
       this.getDeviceEvents(this.device_id);
   }
+
+  locationBack():any{
+    history.back()
+  }
 }
