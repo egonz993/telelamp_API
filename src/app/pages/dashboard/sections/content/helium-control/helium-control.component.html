@@ -16,7 +16,7 @@
                     <tr>
                         <th>#</th>
                         <th>Category</th>
-                        <th>Time</th>
+                        <th class="d-none d-lg-table-cell">Time</th>
                         <th>Data</th>
                     </tr>
                     </thead>
@@ -30,7 +30,7 @@
                             'bg-secondary': event.sub_category == 'uplink_integration_res' || event.sub_category == 'uplink_integration_req',
                             'bg-danger': event.category == 'uplink_dropped' || event.category == 'downlink_dropped',
                             'bg-warning': event.category == 'join_request' || event.category == 'join_accept'}">{{event.category}}</td>
-                        <td>{{event.time}}</td>
+                        <td class="d-none d-lg-table-cell">{{event.time}}</td>
                         <td>{{event.data}}</td>
                     </tr>
                 </tbody>
