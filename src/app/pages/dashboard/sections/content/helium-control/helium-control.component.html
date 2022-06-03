@@ -1,1 +1,47 @@
-<p>helium-control works!</p>
+<div class="col-md-12">
+    <a target="_blank" href="https://console.helium.com/"><img src="assets/img/helium_logo.png" style="max-width: 200px; padding: 20px 0 30px 0" alt=""></a>
+    <div class="card">
+
+        <div class="card-header">
+            <h3 class="card-title"><b>Devices Control</b></h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-large btn-outline-success p-2" (click)="reloadTable()">Refresh <span class="d-none d-lg-inline">Data</span></button>
+            </div>
+        </div>
+      
+        <div class="card-body p-1">
+
+            <table id="eventsTable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-bordered table-striped table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th>Time</th>
+                        <th>Data</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr *ngFor="let event of events; let i=index">
+                        <th>{{i+1}}</th>
+                        <td class="badge d-table-cell"
+                            [ngClass]="{'bg-success': event.category == 'downlink',
+                            'bg-primary': event.sub_category == 'uplink_confirmed' || event.sub_category == 'uplink_unconfirmed',
+                            'bg-secondary': event.sub_category == 'uplink_integration_res' || event.sub_category == 'uplink_integration_req',
+                            'bg-danger': event.category == 'uplink_dropped' || event.category == 'downlink_dropped',
+                            'bg-warning': event.category == 'join_request' || event.category == 'join_accept'}">{{event.category}}</td>
+                        <td>{{event.time}}</td>
+                        <td>{{event.data}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="loading_div" class="text-center">
+                <img id="loading-image" src="assets/img/giphy-preview.gif" alt="Loading..." style="max-width: 100%;"/>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+
