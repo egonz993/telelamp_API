@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { table } from 'console';
+import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { LanguageApp } from './tableLanguage';
@@ -33,8 +33,7 @@ export class DeviceStatusComponent implements OnInit {
 
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: DataTables.Settings = {
-    pagingType: 'full_numbers',
-    pageLength: 2
+    pageLength: 1
   };
 
   paramsURL:any = [];
@@ -248,6 +247,7 @@ export class DeviceStatusComponent implements OnInit {
       this.devices = [];
       let tabla = $('#devicesTable').DataTable();
       tabla.destroy();
+      
       
       this.getDeviceList();
   }

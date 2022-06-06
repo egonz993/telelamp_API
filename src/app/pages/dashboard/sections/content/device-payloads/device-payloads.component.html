@@ -20,6 +20,7 @@
             <table id="payloadsTable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-bordered table-striped table-hover text-center">
                 <thead>
                     <tr>
+                        <th class="d-none">Time</th>
                         <th>Category</th>
                         <th>Time</th>
                         <th>Data</th>
@@ -28,6 +29,7 @@
 
                 <tbody>
                     <tr *ngFor="let payload of payloads; let i=index">
+                        <td class="d-none">{{formatDate(payload.timestamp)}}</td>
                         <td class="badge d-table-cell"
                             [ngClass]="{'bg-success': payload.category == 'downlink',
                                         'bg-primary': payload.category == 'uplink'}">{{payload.category}}
