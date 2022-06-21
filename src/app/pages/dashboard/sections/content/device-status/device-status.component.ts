@@ -70,6 +70,34 @@ export class DeviceStatusComponent implements OnInit {
     
   }
 
+/*ELIMINAR ESTA FUNCION Y SUSTITUIRLA EN RELOAD TABLE POR getDeviceList*/
+  getdevicesOnePage(){
+    let url = "https://au.saas.orbiwise.com/rest/nodes?limit=100";
+    if($('#txt_comment').val()){
+      url = "https://au.saas.orbiwise.com/rest/nodes?limit=100&search_comment="+$('#txt_comment').val();
+    }
+
+    fetch(url,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + btoa(this.username + ":" + this.password),
+          }
+        }
+      )
+      .then(response=>response.json())
+      .then(data=>{ 
+        this.devices = data;
+        this.devices = this.devices.sort((a:any, b:any) => parseInt(a.comment) - parseInt(b.comment));
+        this.dtTrigger.next(this.devices);
+
+        $('#devicesTable').removeClass('d-none');
+        $('#loading_div').addClass('d-none');
+
+      });
+  }
+
   getDeviceList():any{
     let url = "https://au.saas.orbiwise.com/rest/nodes?get_pages=true";
 
@@ -116,7 +144,7 @@ export class DeviceStatusComponent implements OnInit {
         this.page++;
         if(this.page === pages){
           this.page = 0;
-          //console.log(this.initDevices);
+          console.log(this.devices);
           this.devices = this.devices.sort((a:any, b:any) => parseInt(a.comment) - parseInt(b.comment));
           this.dtTrigger.next(this.devices);
 
@@ -249,7 +277,8 @@ export class DeviceStatusComponent implements OnInit {
       tabla.destroy();
       
       
-      this.getDeviceList();
+      //this.getDeviceList();
+      this.getdevicesOnePage();
   }
 
 }
