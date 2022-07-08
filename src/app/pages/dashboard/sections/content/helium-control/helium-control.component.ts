@@ -9,14 +9,14 @@ import { HeliumEvent } from './event';
   styleUrls: ['./helium-control.component.scss']
 })
 export class HeliumControlComponent implements OnInit {
- 
-  raw_events:any = [];
-  events:any = [];
 
-  paramsURL:any = [];
+  raw_events: any = [];
+  events: any = [];
 
-  device_id:string = "";
-  
+  paramsURL: any = [];
+
+  device_id: string = "";
+
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: DataTables.Settings = {
     pagingType: 'full_numbers',
@@ -24,20 +24,20 @@ export class HeliumControlComponent implements OnInit {
   };
 
 
-  
-  
-  corsAnywhere:string = 'https://cors-anywhere.herokuapp.com/';
-  api_key:string = "AI7+GUCBSPDFBiFktUbYHpe+pIH9yEHkohiVXw9rJUg";
-  
-  
+
+
+  corsAnywhere: string = 'https://cors-anywhere.herokuapp.com/';
+  api_key: string = "AI7+GUCBSPDFBiFktUbYHpe+pIH9yEHkohiVXw9rJUg";
+
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
-  
+
   ngOnInit(): void {
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.paramsURL = params;
 
-      if(typeof this.paramsURL['device_id'] !== "undefined"){
+      if (typeof this.paramsURL['device_id'] !== "undefined") {
         this.device_id = this.paramsURL['device_id']
       }
 
@@ -45,19 +45,19 @@ export class HeliumControlComponent implements OnInit {
 
     this.reloadTable();
 
-    
+
   }
 
 
-  async HTTP_Request_GET(link:string){
+  async HTTP_Request_GET(link: string) {
     let url = this.corsAnywhere + "https://console.helium.com/api/v1/" + link;
     let params = {
-        method: 'GET',
-        headers: new Headers({
-            'key': this.api_key,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        })
+      method: 'GET',
+      headers: new Headers({
+        'key': this.api_key,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      })
     }
 
     const response = await fetch(url, params)
@@ -66,141 +66,162 @@ export class HeliumControlComponent implements OnInit {
 
   }
 
-  async getDeviceEvents(device_id:string){
-    await this.HTTP_Request_GET("devices/" + device_id +"/events")
-    .then((data) => {
+  async getDeviceEvents(device_id: string) {
+    await this.HTTP_Request_GET("devices/" + device_id + "/events")
+      .then((data) => {
         this.raw_events = data;
         this.fillTable();
-    });
+      });
   }
 
-  async getDeviceEvents_UL(device_id:string, format_data:string = 'hex'){
-    await this.HTTP_Request_GET("devices/" + device_id +"/events")
-    .then((data) => {
+  async getDeviceEvents_UL(device_id: string, format_data: string = 'hex') {
+    await this.HTTP_Request_GET("devices/" + device_id + "/events")
+      .then((data) => {
 
-        for(var i=0;i<data.length; i++){
-            
-            if(data[i].category == 'uplink' && (data[i].description == "Unconfirmed data up received" || data[i].description == "Confirmed data up received")){
-                var payload_raw = data[i].data.payload;
+        for (var i = 0; i < data.length; i++) {
 
-                if(format_data == 'base64'){
-                    payload_raw = payload_raw;
-                }
+          if (data[i].category == 'uplink' && (data[i].description == "Unconfirmed data up received" || data[i].description == "Confirmed data up received")) {
+            var payload_raw = data[i].data.payload;
 
-                else if(format_data == 'ascii'){
-                    payload_raw = atob(payload_raw);
-                }
-
-                else if(format_data == 'hex'){
-                    const raw = atob(payload_raw);
-                    payload_raw = '';
-                    for (let j = 0; j < raw.length; j++) {
-                        const hex = raw.charCodeAt(j).toString(16);
-                        payload_raw += (hex.length === 2 ? hex : '0' + hex);
-                    }
-
-                    payload_raw = payload_raw.toUpperCase()
-                }
-
-                console.log(payload_raw)
+            if (format_data == 'base64') {
+              payload_raw = payload_raw;
             }
+
+            else if (format_data == 'ascii') {
+              payload_raw = atob(payload_raw);
+            }
+
+            else if (format_data == 'hex') {
+              const raw = atob(payload_raw);
+              payload_raw = '';
+              for (let j = 0; j < raw.length; j++) {
+                const hex = raw.charCodeAt(j).toString(16);
+                payload_raw += (hex.length === 2 ? hex : '0' + hex);
+              }
+
+              payload_raw = payload_raw.toUpperCase()
+            }
+
+            console.log(payload_raw)
+          }
         }
-    });
+      });
   }
 
-  
 
-  HTTP_Request_POST(device_id:string, body:any){
-    let url = this.corsAnywhere + "https://console.helium.com/api/v1/down/3a0a3c6c-1ba1-4165-a96b-922cc24e0d31/DdiJpZpU7pUlUO-iW4eDYztj8BMn3q5k/" + device_id;
+
+  HTTP_Request_POST(device_id: string, body: any) {
+    let url = this.corsAnywhere + "https://console.helium.com/api/v1/down/3cbbb7a1-4dc9-49ec-9fc9-b66b38e6e7dd/HGvN39qRNEQQd7RLWg6MbJ_6utrKOhH7" + device_id;
     let params = {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: new Headers({
-            'key': this.api_key,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        })
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: new Headers({
+        'key': this.api_key,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      })
     }
 
     fetch(url, params)
   }
 
 
-  downlinkSchedule(device_id:string, payload:any, format_data:string){
-    
+  downlinkSchedule(device_id: string, payload: any, format_data: string) {
+
     let payload_raw = "";
 
-    if(format_data == 'ascii'){
-        payload_raw = atob(payload)
+    if (format_data == 'ascii') {
+      payload_raw = atob(payload)
     }
-    else if(format_data == 'hex'){
-        payload_raw = btoa(payload.match(/\w{2}/g).map(function(a:any) {
-            return String.fromCharCode(parseInt(a, 16));
-        }).join(""));
+    else if (format_data == 'hex') {
+      payload_raw = btoa(payload.match(/\w{2}/g).map(function (a: any) {
+        return String.fromCharCode(parseInt(a, 16));
+      }).join(""));
     }
-    else if(format_data == 'base64'){
-        payload_raw = payload
+    else if (format_data == 'base64') {
+      payload_raw = payload
     }
 
     let body = {
-        "payload_raw": payload_raw,
-        "port": 1,
-        "confirmed": true
+      "payload_raw": payload_raw,
+      "port": 1,
+      "confirmed": true
     };
-    
+
     this.HTTP_Request_POST(device_id, body);
     console.log('payload scheduled');
     console.log(body);
   }
 
 
-  fillTable():any{
-    for(var i=0; i<this.raw_events.length; i++){
+  fillTable(): any {
+    for (var i = 0; i < this.raw_events.length; i++) {
       var event = new HeliumEvent;
 
       event.time = this.formatDate(this.raw_events[i].reported_at);
       event.category = this.raw_events[i].category;
       event.sub_category = this.raw_events[i].sub_category;
 
-      switch(this.raw_events[i].category){
+      switch (this.raw_events[i].category) {
         case 'downlink':
-          event.data = "Payload (hex): " + this.base64ToHex( this.raw_events[i].data.payload);
+          event.data = "Payload (hex): " + this.base64ToHex(this.raw_events[i].data.payload);
           break;
 
-          case 'uplink':
-            if(event.sub_category == "uplink_unconfirmed" || event.sub_category == "uplink_confirmed"){
-              event.data = "Payload (hex): " + this.base64ToHex( this.raw_events[i].data.payload);
+        case 'uplink':
+          if (event.sub_category == "uplink_unconfirmed" || event.sub_category == "uplink_confirmed") {
+            event.data = "Payload (hex): " + this.base64ToHex(this.raw_events[i].data.payload);
+          }
+          else if (event.sub_category == "uplink_integration_res") {
+            event.data = this.raw_events[i].description;//data.req.decoded.projectID;
+          }
+
+/*
+  "payload": {
+                "app_eui ": "6081F98A9B2758E6",
+                "dev_eui ": "AC1F09FFFE0562FE",
+                "devaddr ": "2E030048",
+                "fcnt ": 107,
+                "projectID": 1
+              },
+  */ 
+          else if (event.sub_category == "uplink_integration_req") {
+            let body = this.raw_events[i].data.req.body;
+            if (!body.length){
+              let decoded = this.raw_events[i].data.req.body.decoded.payload; 
+
+              let dev_eui = decoded.dev_eui;
+              let fcnt = decoded.fcnt;
+              let projectID = decoded.projectID;
+
+              event.data =  "fcnt: " + fcnt + "  |  Payload: " + this.base64ToHex(this.raw_events[i].data.req.body.payload);
+
             }
-            
-            else if(event.sub_category == "uplink_integration_req"){
-              event.data = this.raw_events[i].description;
-            }
-            
-            else if(event.sub_category == "uplink_integration_res"){
-              event.data = this.raw_events[i].description;
-            }
-            break;
+            else
+              event.data = this.raw_events[i].data.req.body;
 
-          case 'uplink_dropped':
-            event.data = this.raw_events[i].description;
-            break;
+          }
+          break;
 
-          case 'downlink_dropped':
-            event.data = this.raw_events[i].description;
-            break;
+        case 'uplink_dropped':
+          event.data = this.raw_events[i].description;
+          break;
 
-          case 'join_request':
-            event.data = "Request to: " + this.raw_events[i].data.hotspot.name;
+        case 'downlink_dropped':
+          event.data = this.raw_events[i].description;
+          break;
 
-            break;
+        case 'join_request':
+          event.data = "Request to: " + this.raw_events[i].data.hotspot.name;
 
-          case 'join_accept':
-            event.data = "Accepted by: " + this.raw_events[i].data.hotspot.name;
-            break;
+          break;
 
-          default:
-            event.data = "no data";
-            break;
+        case 'join_accept':
+          event.data = "Accepted by: " + this.raw_events[i].data.hotspot.name;
+          break;
+
+        default:
+          event.data = "no data";
+          break;
       }
 
       this.events.push(event);
@@ -208,8 +229,8 @@ export class HeliumControlComponent implements OnInit {
 
     this.dtTrigger.next(this.events);
 
-    
-    
+
+
     $('#eventsTable').removeClass('d-none');
     $('#loading_div').addClass('d-none');
 
@@ -217,11 +238,11 @@ export class HeliumControlComponent implements OnInit {
   }
 
 
-  formatDate(date?: any):any{
-    date = new Date( parseInt(date) )
+  formatDate(date?: any): any {
+    date = new Date(parseInt(date))
 
     let year = date.getFullYear();
-    let month = date.getMonth()+1;
+    let month = date.getMonth() + 1;
     let day = date.getDate();
 
     let hours = date.getHours();
@@ -230,14 +251,14 @@ export class HeliumControlComponent implements OnInit {
 
     let meridian;
 
-    month<10 ? month = "0" + month : month;
-    day<10 ? day = "0" + day : day;
+    month < 10 ? month = "0" + month : month;
+    day < 10 ? day = "0" + day : day;
 
-    hours>=12 ? meridian = "p.m." : meridian = "a.m.";
-    
+    hours >= 12 ? meridian = "p.m." : meridian = "a.m.";
+
     hours > 12 ? hours -= 12 : hours;
-    hours<10 ? hours = "0" + hours : hours;
-    minutes<10 ? minutes = "0" + minutes : minutes;
+    hours < 10 ? hours = "0" + hours : hours;
+    minutes < 10 ? minutes = "0" + minutes : minutes;
 
 
     date = year + "/" + month + "/" + day + " " + hours + ":" + minutes + " " + meridian;
@@ -245,7 +266,7 @@ export class HeliumControlComponent implements OnInit {
   }
 
 
-  base64ToHex(str:string):any{
+  base64ToHex(str: string): any {
     const raw = atob(str);
     str = '';
     for (let j = 0; j < raw.length; j++) {
@@ -260,22 +281,22 @@ export class HeliumControlComponent implements OnInit {
 
 
 
-  reloadTable():any {
+  reloadTable(): any {
     // let tabla = $('#devicesTable').DataTable();
     // let tableFilter = tabla.search().valueOf();
     // tabla.search("xx"+tableFilter).draw();
-    
-      $('#eventsTable').addClass('d-none');
-      $('#loading_div').removeClass('d-none');
-      
-      this.events = [];
-      let tabla = $('#eventsTable').DataTable();
-      tabla.destroy();
-      
-      this.getDeviceEvents(this.device_id);
+
+    $('#eventsTable').addClass('d-none');
+    $('#loading_div').removeClass('d-none');
+
+    this.events = [];
+    let tabla = $('#eventsTable').DataTable();
+    tabla.destroy();
+
+    this.getDeviceEvents(this.device_id);
   }
 
-  locationBack():any{
+  locationBack(): any {
     history.back()
   }
 }
