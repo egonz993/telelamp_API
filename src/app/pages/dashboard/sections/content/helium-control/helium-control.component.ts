@@ -185,7 +185,7 @@ export class HeliumControlComponent implements OnInit {
               let fcnt = decoded.fcnt;
               let projectID = decoded.projectID;
 
-              event.data =  "fcnt: " + fcnt + "  |  Payload: " + this.base64ToHex(this.raw_events[i].data.req.body.payload);
+              event.data =  "Decoder >>> fcnt: " + fcnt + "  |  Payload: " + this.base64ToHex(this.raw_events[i].data.req.body.payload);
 
             }
             else
