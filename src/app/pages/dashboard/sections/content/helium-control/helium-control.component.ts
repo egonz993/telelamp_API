@@ -172,18 +172,10 @@ export class HeliumControlComponent implements OnInit {
             event.data = "Payload (hex): " + this.base64ToHex(this.raw_events[i].data.payload);
           }
           else if (event.sub_category == "uplink_integration_res") {
-            event.data = this.raw_events[i].description;//data.req.decoded.projectID;
+            let status = this.raw_events[i].data.integration.status;
+            event.data = "HTTP Decoder Request: " + status;
           }
 
-/*
-  "payload": {
-                "app_eui ": "6081F98A9B2758E6",
-                "dev_eui ": "AC1F09FFFE0562FE",
-                "devaddr ": "2E030048",
-                "fcnt ": 107,
-                "projectID": 1
-              },
-  */ 
           else if (event.sub_category == "uplink_integration_req") {
             let body = this.raw_events[i].data.req.body;
             if (!body.length){
